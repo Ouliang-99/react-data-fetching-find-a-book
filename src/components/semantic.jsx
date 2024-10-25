@@ -14,17 +14,19 @@ export function SearchField() {
 
       try {
         const response = await axios.get(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}`
+          `https://openlibrary.org/search.json?q=${query}`
         );
-        setBooks(response.data.items || []);
+        console.log(response.data);
+        setBooks(response.data.docs || []);
       } catch (error) {
-        console.error(`Error: ${error}`);
+        console.error("Error: ", error);
       }
     };
 
     handleSearch();
 
-  }, [query])
+  }, [query]);
+
   return (
     <main>
       <h1>Find a Book</h1>
@@ -37,8 +39,8 @@ export function SearchField() {
         {books.length > 0 ? (
           <ul>
             {books.map((book) => (
-              <li key={book.id}>
-                <h3>{book.volumeInfo.title}</h3>
+              <li key={book.key}>
+                <h3>{book.title}</h3>
               </li>
             ))}
           </ul>

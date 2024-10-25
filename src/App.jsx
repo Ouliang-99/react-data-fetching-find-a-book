@@ -1,5 +1,5 @@
 import "./App.css";
-import { SearchField } from "../components/semantic";
+import { SearchField } from "./components/semantic";
 
 function App() {
   return (
